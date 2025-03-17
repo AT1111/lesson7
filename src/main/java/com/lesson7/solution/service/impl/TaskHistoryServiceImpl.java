@@ -18,6 +18,7 @@ public class TaskHistoryServiceImpl implements TaskHistoryService {
     @Override
     public List<TaskHistoryResponseDto> findByTodoId(Long id) {
         return taskHistoryRepository.findAllByTodoId(id).stream()
-            .map(taskHistoryMapper::toResponseDto).toList();
+            .map(taskHistoryMapper::toResponseDto)
+            .toList();
     }
 }

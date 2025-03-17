@@ -1,6 +1,5 @@
 package com.lesson7.solution.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lesson7.solution.entity.TaskHistory;
 import com.lesson7.solution.entity.Todo;
 import com.lesson7.solution.exception.EntityNotFoundException;
@@ -24,7 +23,6 @@ public class TodoServiceImpl implements TodoService {
     private final TodoRepository todoRepository;
     private final TaskHistoryRepository taskHistoryRepository;
     private final TodoMapper todoMapper;
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public TodoResponseDto create(TodoCreateDto todoCreateDto) {
@@ -34,10 +32,9 @@ public class TodoServiceImpl implements TodoService {
     @Transactional
     @Override
     public TodoResponseDto update(Long id, TodoUpdateDto todoUpdateDto) {
-        Todo todoOld = todoRepository.findById(id).orElse(null);
-        if (todoOld == null) {
-            throw new EntityNotFoundException("Todo with id " + id + " not found.");
-        }
+        Todo todoOld = todoRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Todo with id " + id + " not found."));
+
         Todo todoNew = todoMapper.updateToModel(todoUpdateDto);
         todoNew.setId(id);
         todoNew.setCreatedDate(todoOld.getCreatedDate());

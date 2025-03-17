@@ -1,6 +1,5 @@
 package com.lesson7.solution.entity;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
@@ -18,7 +17,6 @@ import java.time.LocalDateTime;
 import static com.lesson7.solution.entity.TodoPriority.LOW;
 import static com.lesson7.solution.entity.TodoStatus.PENDING;
 
-@JsonAutoDetect
 @Data
 @Entity
 @Table(name = "todo")

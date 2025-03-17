@@ -6,6 +6,7 @@ import com.lesson7.solution.model.TodoResponseDto;
 import com.lesson7.solution.model.TodoUpdateDto;
 import com.lesson7.solution.service.TaskHistoryService;
 import com.lesson7.solution.service.TodoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +27,12 @@ public class TodoController {
     private final TaskHistoryService taskHistoryService;
 
     @PostMapping
-    public TodoResponseDto create(@RequestBody TodoCreateDto todoCreateDto) {
+    public TodoResponseDto create(@RequestBody @Valid TodoCreateDto todoCreateDto) {
         return todoService.create(todoCreateDto);
     }
 
     @PutMapping("/{id}")
-    public TodoResponseDto update(@PathVariable Long id, @RequestBody TodoUpdateDto todoUpdateDto) {
+    public TodoResponseDto update(@PathVariable Long id, @RequestBody @Valid TodoUpdateDto todoUpdateDto) {
         return todoService.update(id, todoUpdateDto);
     }
 
